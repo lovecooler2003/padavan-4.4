@@ -4,7 +4,7 @@ set -e -o pipefail
 [ "$1" != "force" ] && [ "$(nvram get ss_update_gfwlist)" != "1" ] && exit 0
 #GFWLIST_URL="$(nvram get gfwlist_url)"
 logger -st "gfwlist" "Starting update..."
-curl -k -s -o /tmp/gfwlist_list_origin.conf --connect-timeout 15 --retry 5 https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/gfw.txt
+curl -k -s -o /tmp/gfwlist_list_origin.conf --connect-timeout 15 --retry 5 https://cdn.jsdelivr.net/gh/gfwlist/gfwlist/gfwlist.txt
 lua /etc_ro/ss/gfwupdate.lua
 count=`awk '{print NR}' /tmp/gfwlist_list.conf|tail -n1`
 if [ $count -gt 1000 ]; then
